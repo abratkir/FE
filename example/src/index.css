@@ -1,0 +1,110 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  min-height: 40px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  min-width: 40px;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+	margin: 10px 10px 10px 10px;
+}
+
+.left-min {
+	min-width: 180px;
+}
+
+.left-text-min {
+	min-width: 180px;
+}
+
+.left-h-text-min {
+	min-width: 290px;
+}
+
+.left-max{
+	max-width: 200px;
+}
+
+.left-max-p{
+	max-width: 60%;
+	min-width: 40%;
+}
+
+.left-min-c {
+	min-width: 150px;
+}
+
+.left-min-r {
+	min-width: 280px;
+}
+
+.about-logo {
+  animation: App-logo-spin infinite 10s linear;
+	border-radius: 75px;
+	border-width: 1px ;
+	border-style: solid;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.trash {
+  min-width: 16px;
+  min-height: 16px;
+  width: 20px;
+  height: 20px;
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border-top: 2px solid #07d;
+  border-right: 2px solid transparent;
+  animation: spinner .6s linear infinite;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.break-word {
+	-ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
