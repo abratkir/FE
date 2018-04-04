@@ -1,20 +1,5 @@
 import { ADD_ARTICLE, DELETE_ARTICLE } from "../constants/action-types";
-
-function removeFromArray(array, index) {
-	if (array.length > index) {
-		if (array.length === index) {
-			return [];
-		} else {
-			if (index === 0) {
-				return array.slice(1, array.length);
-			} else {
-				var result = array.slice(0, index);
-				return result.concat(array.slice(index+1));
-			}
-		}
-	}
-	throw 'Index out of bound';
-}
+import {removeFromArray} from "../../../util";
 
 const articleReducer = (state = [], action) => {
   switch (action.type) {

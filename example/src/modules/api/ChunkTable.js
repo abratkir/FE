@@ -12,7 +12,6 @@ class SortButton extends React.Component {
 	}
 	
 	handleClick(event) {
-		debugger;
     event.preventDefault();
 		this.props.action(event.target.value, this.props.source === arrowDown ? "ASC" : "DESC");
 	}
@@ -20,7 +19,7 @@ class SortButton extends React.Component {
   render() {
 		return (
 			<button key={this.props.value} value={this.props.path} type="submit" className="btn btn-default btn-sm" onClick={this.handleClick}>
-				<img src={this.props.source}/>
+				<img src={this.props.source} alt=""/>
 			</button>
 		)
 	}
@@ -38,7 +37,6 @@ class ChunkTable extends React.Component {
 	}
 	
 	parseData(d, sort) {
-		debugger;
 		let data = sort ? d.sort(sort) : d;
 		let sortedConf = this.props.conf.sort((a1, a2) => a1.order > a2.order);
 		return (
@@ -47,10 +45,10 @@ class ChunkTable extends React.Component {
 					<tr key={number}>
 						<th scope="row" className="align-middle">{number+1}</th>
 						{ 
-							sortedConf.map( c => { 
+							sortedConf.map( (c, id) => { 
 									let data = getDataFromObject(person, c.path);
 									let child = c.isImg ? <img src={data} alt=""/> : data;
-									return (<td className={c.className}>{child}</td>)
+									return (<td key={id} className={c.className}>{child}</td>)
 								} 
 							)
 						}
@@ -62,7 +60,6 @@ class ChunkTable extends React.Component {
 	}
 	
 	changeSort(path, sortOrder) {
-		debugger;
 		this.setState({
 			sort: (a1, a2) => (
 				sortOrder==="ASC" ? getDataFromObject(a1, path) > getDataFromObject(a2, path) :
@@ -82,10 +79,10 @@ class ChunkTable extends React.Component {
 						<th scope="col" className="align-middle text-center">#</th>
 						{ 
 							this.props.conf.sort((a1, a2) => a1.order > a2.order).map(
-								c => {
+								(c, id) => {
 									if (c.isSort) {
 											return (
-												<th scope="col" className="align-middle">
+												<th scope="col" key={id} className="align-middle">
 													<div className="flex-row justify-content-center align-middle">
 														{c.name}{'  '}
 														<SortButton path={c.path} source={arrowDown} action={this.changeSort}/>
@@ -95,7 +92,7 @@ class ChunkTable extends React.Component {
 											);
 									} else {
 										return (
-											<th scope="col" className="align-middle">
+											<th scope="col" key={id} className="align-middle">
 												{c.name}
 											</th>
 										)

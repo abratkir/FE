@@ -23,7 +23,7 @@ class ConnectedButton extends React.Component {
   render() {
 		return (
 			<button key={this.props.value} value={this.props.value} type="submit" className="btn btn-danger btn-sm" onClick={this.handleClick}>
-				<img src="./icons/trash.png"/>
+				<img src="./icons/trash.png" alt=""/>
 			</button>
 		)
 	}

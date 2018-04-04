@@ -12,3 +12,19 @@ export function getDataFromObject(o, path) {
 	}
 	return o;
 };
+
+export function removeFromArray(array, index) {
+	if (array.length > index) {
+		if (array.length === index) {
+			return [];
+		} else {
+			if (index === 0) {
+				return array.slice(1, array.length);
+			} else {
+				var result = array.slice(0, index);
+				return result.concat(array.slice(index+1));
+			}
+		}
+	}
+	throw new Error('Index out of bound');
+};

@@ -20,7 +20,7 @@ class Form extends Component {
     event.preventDefault();
     const { title } = this.state;
 		if (title === "") {
-			alert("Nie wprowadzono tytułu");
+			alert("Empty titile is not allowed");
 		} else {
 			const id = uuidv1();
 			let action = {type: "ADD_ARTICLE", payload: { title, id }};

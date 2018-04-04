@@ -28,7 +28,7 @@ class ConnectedForm extends Component {
     event.preventDefault();
     const { title } = this.state;
 		if (title === "") {
-			alert("Nie wprowadzono tytułu");
+			alert("Empty titile is not allowed");
 		} else {
 			const id = uuidv1();
 			this.props.addArticle({ title, id });
@@ -42,9 +42,9 @@ class ConnectedForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">Title</span>
+					<div className="input-group mb-3">
+						<div className="input-group-prepend">
+							<span className="input-group-text" id="basic-addon1">Title</span>
 						</div>
 						<textarea type="text" className="form-control" id="title" value={title} onChange={this.handleChange} />
 					</div>
