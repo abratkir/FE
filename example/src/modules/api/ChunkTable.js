@@ -18,7 +18,7 @@ class SortButton extends React.Component {
 	
   render() {
 		return (
-			<button key={this.props.value} value={this.props.path} type="submit" className="btn btn-default btn-sm" onClick={this.handleClick}>
+			<button key={this.props.value} value={this.props.path} type="submit" className="btn btn-link btn-sm border" onClick={this.handleClick}>
 				<img src={this.props.source} alt=""/>
 			</button>
 		)
@@ -69,9 +69,22 @@ class ChunkTable extends React.Component {
 		)
 	}
 	
+	renderSpinner(isSpinner) {
+		if (isSpinner) {
+			return (
+				<tr>
+					<th colSpan={this.props.conf.length+1} scope="row">
+						<div className="d-flex justify-content-center spinner m-5"/>
+					</th>
+				</tr>
+			)
+		} else {
+			return;
+		}
+	}
+	
 	render() {
 		let data = this.props && this.props.data && !this.props.spinner && this.parseData(this.props.data, this.state.sort);
-		let spinner = this.props.spinner ? "mx-auto d-block spinner" : "";
 		return (
 			<table className="table table-striped table-hover table-sm table-bordered mr-5">	
 				<thead className="table-secondary">
@@ -84,7 +97,7 @@ class ChunkTable extends React.Component {
 											return (
 												<th scope="col" key={id} className="align-middle">
 													<div className="flex-row justify-content-center align-middle">
-														{c.name}{'  '}
+														<div className="flex-row align-middle justify-content-center text-center">{c.name}</div>
 														<SortButton path={c.path} source={arrowDown} action={this.changeSort}/>
 														<SortButton path={c.path} source={arrowUp} action={this.changeSort}/>
 													</div>
@@ -102,7 +115,8 @@ class ChunkTable extends React.Component {
 						}
 					</tr>
 				</thead>
-				<tbody className={spinner}>
+				<tbody>
+					{this.renderSpinner(this.props.spinner)}
 					{data}
 				</tbody>
 			</table>
