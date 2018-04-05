@@ -2,7 +2,7 @@ import React from "react";
 import ArticleTable from "./ArticleTable";
 import Form from "./Form";
 import {ArticleContext} from "./ArticleContext";
-import {removeFromArray} from "../../util";
+import {removeFromArray} from "../utils/util";
 
 class ContextTest extends React.Component {
 	constructor(props) {

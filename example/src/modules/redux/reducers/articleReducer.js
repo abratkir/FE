@@ -1,5 +1,5 @@
 import { ADD_ARTICLE, DELETE_ARTICLE } from "../constants/action-types";
-import {removeFromArray} from "../../../util";
+import {removeFromArray} from "../../utils/util";
 
 const articleReducer = (state = [], action) => {
   switch (action.type) {

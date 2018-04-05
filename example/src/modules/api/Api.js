@@ -1,18 +1,23 @@
 import React from 'react';
 import axios from 'axios';
 import {testApiUrl as URL} from '../../config.js';
-import ChunkTable from './ChunkTable';
-import SearchButton from './SearchButton';
+import {tableConfig, searchRange, defaultSearchParam} from './config.js';
+import SimpleTable from '../utils/table/SimpleTable';
+import SearchInputBounded from '../utils/input/SearchInputBounded';
 
 class Api extends React.Component {
 	
 	constructor(props) {
 		super(props);
 		this.state = {
-			persons: this.getData(1),
-			number: 1,
+			persons: [],
+			number: defaultSearchParam,
 			spinner: true
 		}
+	}
+	
+	componentDidMount() {
+		this.getData(defaultSearchParam);
 	}
 	
 	getData(number) {
@@ -25,26 +30,25 @@ class Api extends React.Component {
 	
 	updateNumber(event) {
 		if (event.target.value && event.target.value !== this.state.number) {
-			this.setState({number: event.target.value, spinner: true});
-			this.getData(event.target.value);
+			if (Number(event.target.value) < searchRange.bottom || Number(event.target.value) > searchRange.upper) {
+				this.setState({number: event.target.value, spinner: false});
+				return;
+			} else {
+				this.setState({number: event.target.value, spinner: true});
+				this.getData(event.target.value);
+			}
 		}
 	}
 	
 	render() {
-		let configuration = [
-			{name: "First", className: "text-capitalize align-middle", order: 1, path: "name.first", isImg: false, isSort: true},
-			{name: "Last", className: "text-capitalize align-middle", order: 2, path: "name.last", isImg: false, isSort: true},
-			{name: "Gender", className: "align-middle", order: 3, path: "gender", isImg: false, isSort: true},
-			{name: "User name", className: "align-middle", order: 4, path: "login.username", isImg: false, isSort: true},
-			{name: "Picture", className: "align-middle", order: 5, path: "picture.thumbnail", isImg: true, isSort: false}
-		];
+		
 		return (
 			<div className="flex-row row-inline-block container justify-content-start m-0 p-0">
 				<div className="col col-md-auto left-max left-min-c m-0 p-0">
-					<SearchButton number={this.state.number} onChange={(event) => {this.updateNumber(event)}}/>
+					<SearchInputBounded range={searchRange} number={this.state.number} onChange={(event) => {this.updateNumber(event)}}/>
 				</div>
 				<div className="col justify-content-center text-center">
-					<ChunkTable data={this.state.persons} spinner={this.state.spinner} conf={configuration}/>
+					<SimpleTable data={this.state.persons} spinner={this.state.spinner} conf={tableConfig}/>
 				</div>
 			</div>
 		);

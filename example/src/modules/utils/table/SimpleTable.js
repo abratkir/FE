@@ -1,5 +1,5 @@
 import React from 'react';
-import {getDataFromObject} from '../../util';
+import {getDataFromObject} from '../util';
 
 const arrowDown = "./icons/arrow-bottom-2x.png";
 const arrowUp = "./icons/arrow-top-2x.png";
@@ -26,7 +26,7 @@ class SortButton extends React.Component {
 	
 }
 
-class ChunkTable extends React.Component {
+class SimpleTable extends React.Component {
 	
 	constructor(props) {
 		super(props);
@@ -124,4 +124,4 @@ class ChunkTable extends React.Component {
 	}
 }
 
-export default ChunkTable;
+export default SimpleTable;
