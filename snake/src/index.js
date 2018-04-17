@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from './store';
+import Snake from './snake';
+
 
 ReactDOM.render(
-	<div className="d-flex">
-		<button className="btn btn-primary btn-sm">
-			Test
-		</button>
-	</div>,
+	<Provider store={store}>
+		<Snake />
+	</Provider>,
 	document.getElementById("root")
 );
 

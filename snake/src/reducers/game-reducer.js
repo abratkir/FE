@@ -123,7 +123,7 @@ function moveSnake(snake, food, mapSize) {
 	let resultSnakeCoord = snake.coord.slice();
 	let newHeadCoord = returnNewHeadCoord(resultSnakeCoord[resultSnakeCoord.length-1], snake.direction);
 	if (checkHeadCollision(snakeCoord, mapSize, newHeadCoord)) {
-		//TODO lose game
+		return null;
 	}
 	resultSnakeCoord.push(newHeadCoord);
 	let resultFood;
@@ -133,7 +133,7 @@ function moveSnake(snake, food, mapSize) {
 		resultFood = food;
 		resultSnakeCoord.shift();
 	}
-	
+	return ({snake: resultSnakeCoord, food: resultFood});
 }
 
 export const gameReducer = (state = defaultState, action) => {
@@ -144,7 +144,18 @@ export const gameReducer = (state = defaultState, action) => {
 				game: {...state.game, play: !state.game.play}
 			};
 		case MOVE:
-			return ;
+			let moveResult = moveSnake(state.snake, state.food, state.map.size);
+			if (moveResult) {
+				return {...state,
+					snake: moveResult.snake,
+					food: moveResult.food
+				};
+			} else {
+				return {
+					...state,
+					game: {...state.game, play: false}
+				}
+			}
 		case NEW_GAME:
 			return {
 				...defaultState,

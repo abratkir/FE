@@ -41,7 +41,6 @@ class Api extends React.Component {
 	}
 	
 	render() {
-		
 		return (
 			<div className="flex-row row-inline-block container justify-content-start m-0 p-0">
 				<div className="col col-md-auto left-max left-min-c m-0 p-0">

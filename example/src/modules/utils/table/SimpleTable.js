@@ -13,12 +13,12 @@ class SortButton extends React.Component {
 	
 	handleClick(event) {
     event.preventDefault();
-		this.props.action(event.target.value, this.props.source === arrowDown ? "ASC" : "DESC");
+		this.props.action(this.props.path, this.props.source === arrowDown ? "ASC" : "DESC");
 	}
 	
   render() {
 		return (
-			<button key={this.props.value} value={this.props.path} type="submit" className="btn btn-link btn-sm border" onClick={this.handleClick}>
+			<button key={this.props.value} type="submit" className="btn btn-link btn-sm border" onClick={this.handleClick}>
 				<img src={this.props.source} alt=""/>
 			</button>
 		)
@@ -46,6 +46,7 @@ class SimpleTable extends React.Component {
 						<th scope="row" className="align-middle">{number+1}</th>
 						{ 
 							sortedConf.map( (c, id) => { 
+									console.log(c);
 									let data = getDataFromObject(person, c.path);
 									let child = c.isImg ? <img src={data} alt=""/> : data;
 									return (<td key={id} className={c.className}>{child}</td>)
